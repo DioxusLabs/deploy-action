@@ -31,14 +31,17 @@ runs:
         target: wasm32-unknown-unknown
         override: true
     - uses: Swatinem/rust-cache@v1
-    - run: cargo install --git https://github.com/${{ inputs.toolSource }}
+    - name: Install Dioxus-CLI
+      shell: bash
+      run: cargo install --git https://github.com/${{ inputs.toolSource }}
 
     - name: Build Project 🎁
+      shell: bash
       run: cd ${{ inputs.rootPath }} && dioxus build --profile ${{ inputs.outDirectory }} && cp ./${{ inputs.outDirectory }}/index.html ./${{ inputs.outDirectory }}/404.html
 
     - name: Deploy Project 🚀
       uses: JamesIves/github-pages-deploy-action@v4.2.3
       with:
         branch: gh-pages
-        folder: ${{ outDirectory }}
+        folder: ${{ inputs.outDirectory }}
         clean: false

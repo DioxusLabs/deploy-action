@@ -37,7 +37,7 @@ runs:
 
     - name: Build Project 🎁
       shell: bash
-      run: cd ${{ inputs.rootPath }} && dioxus build --profile ${{ inputs.outDirectory }} && cp ./${{ inputs.outDirectory }}/index.html ./${{ inputs.outDirectory }}/404.html
+      run: cd ${{ inputs.rootPath }} && dioxus build --profile ${{ inputs.buildProfile }} && cp ./${{ inputs.outDirectory }}/index.html ./${{ inputs.outDirectory }}/404.html
 
     - name: Deploy Project 🚀
       uses: JamesIves/github-pages-deploy-action@v4.2.3

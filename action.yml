@@ -1,0 +1,44 @@
+name: "Dioxus Deploy"
+author: "YuKun Liu <mrxzx.info@gmail.com>"
+description: "Deploy your dioxus-web app online"
+
+inputs:
+  toolSource:
+    description: "dioxus-cli install repo [default: 'DioxusLabs/cli']"
+    required: true
+    default: "DioxusLabs/cli"
+  buildProfile:
+    description: "dioxus-cli(cargo) build profile [default: 'release']"
+    required: true,
+    default: "release"
+  outDirectory:
+    description: "The `out_dir` property configured in Dioxus.toml [default: 'dist']"
+    required: true,
+    default: "dist"
+  rootPath:
+    description: "Source code root path [default: '.']"
+    required: true,
+    default: "."
+
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/checkout@v3
+    - uses: actions-rs/toolchain@v1
+      with:
+        toolchain: stable
+        profile: minimal
+        target: wasm32-unknown-unknown
+        override: true
+    - uses: Swatinem/rust-cache@v1
+    - run: cargo install --git https://github.com/${{ inputs.toolSource }}
+
+    - name: Build Project 🎁
+      run: cd ${{ inputs.rootPath }} && dioxus build --profile ${{ inputs.outDirectory }} && cp ./${{ inputs.outDirectory }}/index.html ./${{ inputs.outDirectory }}/404.html
+
+    - name: Deploy Project 🚀
+      uses: JamesIves/github-pages-deploy-action@v4.2.3
+      with:
+        branch: gh-pages
+        folder: ${{ outDirectory }}
+        clean: false

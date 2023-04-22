@@ -13,6 +13,10 @@ inputs:
     description: "Build projects using different modes [default: 'release']"
     required: true
     default: "release"
+  toolchain:
+    description: "Build projects using a different rust toolchain [default: 'stable']"
+    required: true
+    default: "stable"
   outDirectory:
     description: "The `out_dir` property configured in Dioxus.toml [default: 'dist']"
     required: true
@@ -28,7 +32,7 @@ runs:
     - uses: actions/checkout@v3
     - uses: actions-rs/toolchain@v1
       with:
-        toolchain: stable
+        toolchain: ${{ inputs.toolchain }}
         profile: minimal
         target: wasm32-unknown-unknown
         override: true

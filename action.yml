@@ -1,6 +1,8 @@
 name: "Dioxus Deploy"
 author: "YuKun Liu <mrxzx.info@gmail.com>"
 description: "Deploy your dioxus-web app online"
+icon: "book"
+color: "blue"
 
 inputs:
   toolSource:

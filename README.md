@@ -17,5 +17,5 @@ jobs:
       - name: "Dioxus Deploy"
         uses: DioxusLabs/deploy-action@v1
         with:
-          toolSource: "mrxiaozhuox/dioxus-cli"
+          toolSource: "Dioxuslabs/cli"
 ```

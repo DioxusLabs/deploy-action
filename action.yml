@@ -30,7 +30,7 @@ runs:
         profile: minimal
         target: wasm32-unknown-unknown
         override: true
-    - uses: Swatinem/rust-cache@v1
+    - uses: Swatinem/rust-cache@v2
     - name: Install Dioxus-CLI
       shell: bash
       run: cargo install --git https://github.com/${{ inputs.toolSource }}

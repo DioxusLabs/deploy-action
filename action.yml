@@ -5,10 +5,6 @@ icon: "book"
 color: "blue"
 
 inputs:
-  toolSource:
-    description: "dioxus-cli install repo [default: 'DioxusLabs/cli']"
-    required: true
-    default: "DioxusLabs/cli"
   buildMode:
     description: "Build projects using different modes [default: 'release']"
     required: true
@@ -39,11 +35,11 @@ runs:
     - uses: Swatinem/rust-cache@v2
     - name: Install Dioxus-CLI
       shell: bash
-      run: cargo install --git https://github.com/${{ inputs.toolSource }}
+      run: cargo install dioxus-cli
 
     - name: Build Project 🎁
       shell: bash
-      run: cd ${{ inputs.rootPath }} && dioxus build --${{ inputs.buildMode }} && cp ./${{ inputs.outDirectory }}/index.html ./${{ inputs.outDirectory }}/404.html
+      run: cd ${{ inputs.rootPath }} && dx build --${{ inputs.buildMode }} && cp ./${{ inputs.outDirectory }}/index.html ./${{ inputs.outDirectory }}/404.html
 
     - name: Deploy Project 🚀
       uses: JamesIves/github-pages-deploy-action@v4.4.1

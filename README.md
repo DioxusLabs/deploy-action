@@ -16,6 +16,4 @@ jobs:
     steps:
       - name: "Dioxus Deploy"
         uses: DioxusLabs/deploy-action@v1
-        with:
-          toolSource: "Dioxuslabs/cli"
 ```

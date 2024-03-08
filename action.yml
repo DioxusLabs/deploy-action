@@ -39,7 +39,7 @@ runs:
 
     - name: Update wasm-bindgen
       shell: bash
-      run: cargo update -p wasm-bindgen --precise 0.2.92
+      run: cargo update -p wasm-bindgen --precise 0.2.90
 
     - name: Build Project 🎁
       shell: bash

@@ -37,9 +37,9 @@ runs:
       shell: bash
       run: cargo install dioxus-cli
 
-    - name: Update wasm-bindgen
+    - name: Update wasm-bindgen-cli
       shell: bash
-      run: cargo update -p wasm-bindgen --precise 0.2.90
+      run: cargo install -f wasm-bindgen-cli --version 0.2.90
 
     - name: Build Project 🎁
       shell: bash

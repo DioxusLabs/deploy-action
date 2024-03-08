@@ -37,6 +37,10 @@ runs:
       shell: bash
       run: cargo install dioxus-cli
 
+    - name: Update wasm-bindgen
+      shell: bash
+      run: cargo update -p wasm-bindgen --precise 0.2.92
+
     - name: Build Project 🎁
       shell: bash
       run: cd ${{ inputs.rootPath }} && dx build --${{ inputs.buildMode }} && cp ./${{ inputs.outDirectory }}/index.html ./${{ inputs.outDirectory }}/404.html

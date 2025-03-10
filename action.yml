@@ -21,6 +21,9 @@ inputs:
     description: "Source code root path [default: '.']"
     required: true
     default: "."
+  cname:
+    description: "The CNAME for your github page, if used"
+    required: false
 
 runs:
   using: "composite"
@@ -40,6 +43,15 @@ runs:
     - name: Build Project 🎁
       shell: bash
       run: cd ${{ inputs.rootPath }} && dx build --${{ inputs.buildMode }} && cp ./${{ inputs.outDirectory }}/index.html ./${{ inputs.outDirectory }}/404.html
+
+    - name: Add .nojekyl
+      shell: bash
+      run: cd ${{ inputs.rootPath }}/${{ inputs.outDirectory }} && touch .nojekyl
+
+    - name: Add CNAME
+      shell: bash
+      if: "${{ inputs.cname != '' }}"
+      run: cd ${{ inputs.rootPath }}/${{ inputs.outDirectory }} && echo "${{ inputs.cname }}" > CNAME
 
     - name: Deploy Project 🚀
       uses: JamesIves/github-pages-deploy-action@v4.4.1
